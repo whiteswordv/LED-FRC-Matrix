@@ -1,11 +1,7 @@
-
-from txt import *
-from textFlash import *
 import time 
 from rgbmatrix import RGBMatrix, RGBMatrixOptions
 import sys
-import LEDmode
-import prootMode
+from prootMode import prootMode
 
 REFRESH_RATE = 0.03
 
