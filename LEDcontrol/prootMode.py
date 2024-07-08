@@ -5,8 +5,18 @@ import math
 from rgbmatrix import RGBMatrix
 from PIL import Image, ImageFilter
 
-import LEDmode
-
+from LEDmode import LEDmode
+rightEye = Image.open("/home/pi/LEDcontrol/media/prootImg/rightEye.png")
+leftEye = Image.open("/home/pi/LEDcontrol/media/prootImg/leftEye.png")
+rightSmile = Image.open("/home/pi/LEDcontrol/media/prootImg/rightSmile.png")
+leftSmile = Image.open("/home/pi/LEDcontrol/media/prootImg/leftSmile.png")
+nose = Image.open("/home/pi/LEDcontrol/media/prootImg/nose.png")
+faceSmall = Image.open("/home/pi/LEDcontrol/media/prootImg/faceSmall.png")
+faceNormal = Image.open("/home/pi/LEDcontrol/media/prootImg/faceNormal.png")
+googleLeft = Image.open("/home/pi/LEDcontrol/media/prootImg/googleLeft.png")
+googleRight = Image.open("/home/pi/LEDcontrol/media/prootImg/googleRight.png")
+blinklyLeft = Image.open("/home/pi/LEDcontrol/media/prootImg/blinklyLeft.png")
+blinklyRight = Image.open("/home/pi/LEDcontrol/media/prootImg/blinklyRight.png")
 class prootMode(LEDmode):
 
     def __init__(self, matrix):
@@ -96,17 +106,6 @@ class prootMode(LEDmode):
 
 
     def startup(self):
-        self.rightEye = Image.open("/home/pi/LEDcontrol/media/prootImg/rightEye.png")
-        self.leftEye = Image.open("/home/pi/LEDcontrol/media/prootImg/leftEye.png")
-        self.rightSmile = Image.open("/home/pi/LEDcontrol/media/prootImg/rightSmile.png")
-        self.leftSmile = Image.open("/home/pi/LEDcontrol/media/prootImg/leftSmile.png")
-        self.nose = Image.open("/home/pi/LEDcontrol/media/prootImg/nose.png")
-        self.faceSmall = Image.open("/home/pi/LEDcontrol/media/prootImg/faceSmall.png")
-        self.faceNormal = Image.open("/home/pi/LEDcontrol/media/prootImg/faceNormal.png")
-        self.googleLeft = Image.open("/home/pi/LEDcontrol/media/prootImg/googleLeft.png")
-        self.googleRight = Image.open("/home/pi/LEDcontrol/media/prootImg/googleRight.png")
-        self.blinklyLeft = Image.open("/home/pi/LEDcontrol/media/prootImg/blinklyLeft.png")
-        self.blinklyRight = Image.open("/home/pi/LEDcontrol/media/prootImg/blinklyRight.png")
         
         self.angle = 0
         self.angleWarp = 0
@@ -114,17 +113,20 @@ class prootMode(LEDmode):
         self.x = 0
         self.y = 0
     
-        self.rightEyeBox = prootMode.getImageCenter(self.rightEye)
-        self.leftEyeBox = prootMode.getImageCenter(self.leftEye)
-        self.googleLeftBox = prootMode.getImageCenter(self.googleLeft)
-        self.googleRightBox = prootMode.getImageCenter(self.googleRight)
-        self.noseBox = prootMode.getImageCenter(self.nose)
-        self.rightSmileBox = prootMode.getImageCenter(self.rightSmile)
-        self.leftSmileBox = prootMode.getImageCenter(self.leftSmile)
+        self.rightEyeBox = prootMode.getImageCenter(rightEye)
+        self.leftEyeBox = prootMode.getImageCenter(leftEye)
+        self.googleLeftBox = prootMode.getImageCenter(googleLeft)
+        self.googleRightBox = prootMode.getImageCenter(googleRight)
+        self.noseBox = prootMode.getImageCenter(nose)
+        self.rightSmileBox = prootMode.getImageCenter(rightSmile)
+        self.leftSmileBox = prootMode.getImageCenter(leftSmile)
 
 
     def periodic(self):
-        self.angleWarp += .01 if self.directionFlip else -.01
+        if not self.directionFlip:
+            self.angleWarp += .01 
+        else:
+            self.angleWarp -= .01
         if self.angleWarp >= 2:
             self.directionFlip = True
         if self.angleWarp <= 0:
@@ -136,24 +138,14 @@ class prootMode(LEDmode):
         self.setImg([ 
                 #[googleLeft, googleLeftBox, angleWarp*20, math.sin(x)*2, steepSin(y)*2], 
                 #[googleRight, googleRightBox, -angleWarp*20, math.sin(x)*2, steepSin(y)*2], 
-                [self.leftEye, self.leftEyeBox, -self.angleWarp*2, math.sin(self.x)*2, prootMode.steepSin(self.y)*2], 
-                [self.rightEye, self.rightEyeBox, self.angleWarp*2, math.sin(self.x)*2, prootMode.steepSin(self.y)*2], 
-                [self.nose, self.noseBox, 0, 0, 0], 
-                [self.rightSmile, self.rightSmileBox, self.angleWarp, 0, 0], 
-                [self.leftSmile, self.leftSmileBox, -self.angleWarp, 0,0]
+                [leftEye, self.leftEyeBox, -self.angleWarp*2, math.sin(self.x)*2, prootMode.steepSin(self.y)*2], 
+                [rightEye, self.rightEyeBox, self.angleWarp*2, math.sin(self.x)*2, prootMode.steepSin(self.y)*2], 
+                [nose, self.noseBox, 0, 0, 0], 
+                [rightSmile, self.rightSmileBox, self.angleWarp, 0, 0], 
+                [leftSmile, self.leftSmileBox, -self.angleWarp, 0,0]
             ])
     
 
     def onEnd(self):
-        self.rightEye.close() 
-        self.leftEye.close() 
-        self.rightSmile.close()
-        self.leftSmile.close()
-        self.nose.close()
-        self.faceSmall.close()
-        self.faceNormal.close() 
-        self.googleLeft.close()
-        self.googleRight.close() 
-        self.blinklyLeft.close() 
-        self.blinklyRight.close()
+        pass
     
