@@ -2,19 +2,34 @@
 from txt import *
 from textFlash import *
 import time 
+from rgbmatrix import RGBMatrix, RGBMatrixOptions
+import sys
+import LEDmode
+import prootMode
+
+REFRESH_RATE = 0.03
 
 
 if __name__ == "__main__":
+    options = RGBMatrixOptions()
+    options.rows = 32
+    options.cols = 64
+    options.gpio_slowdown = 4
+    options.chain_length = 2
+    options.parallel = 1
+    options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
 
-    text_flash = textFlash("NOTE LAUNCHED!", 0.01, 255, 255, 120, 'blue', 8) #text, scroll speed, (color of text) r, g, b, color of background, #how long to run in seconds
-    if not text_flash.process():
-        text_flash.print_help()
+    matrix = RGBMatrix(options = options)
+    LED_MODE = prootMode(matrix)
 
-    '''
-    run_text = RunText("hi!", 0.01) #text, scroll speed
-    if (not run_text.process()):
-        run_text.print_help()
-    pulsing_colors = PulsingColors()
-    if not pulsing_colors.process():
-        pulsing_colors.print_help()
-    '''
+    try:
+        print("Press CTRL-C to stop.")
+        LED_MODE.startup()
+
+        while True:
+            LED_MODE.periodic()
+            time.sleep(REFRESH_RATE)
+
+    except KeyboardInterrupt:
+        LED_MODE.onEnd()
+        sys.exit(0)
