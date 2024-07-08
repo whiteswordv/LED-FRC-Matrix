@@ -124,7 +124,10 @@ try:
     rightSmileBox = getImageCenter(rightSmile)
     leftSmileBox = getImageCenter(leftSmile)
     while True:
-        angleWarp += .01 if directionFlip else -.01
+        if not directionFlip:
+            angleWarp += .01
+        else:
+            angleWarp -= .01
         if angleWarp >= 2:
             directionFlip = True
         if angleWarp <= 0:

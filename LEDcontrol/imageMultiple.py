@@ -26,7 +26,7 @@ options = RGBMatrixOptions()
 options.rows = 32
 options.cols = 64
 options.gpio_slowdown = 4
-options.chain_length = 1
+options.chain_length = 2
 options.parallel = 1
 options.hardware_mapping = 'adafruit-hat'  # If you have an Adafruit HAT: 'adafruit-hat'
 matrix = RGBMatrix(options = options)
@@ -37,7 +37,7 @@ def clearScreen():
 
 # Make image fit our screen.
 def setImg(imageSet):
-    imageSet.thumbnail((matrix.width, matrix.height), Image.ANTIALIAS)
+    imageSet.thumbnail((64, 32), Image.ANTIALIAS)
 
     matrix.SetImage(imageSet.convert('RGB'))
 
