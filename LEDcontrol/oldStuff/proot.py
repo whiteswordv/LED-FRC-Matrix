@@ -2,7 +2,7 @@
 import time
 import sys
 import math
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from LEDcontrol.simulation.rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image, ImageFilter
 
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from samplebase import SampleBase
+from LEDcontrol.OldStuff.samplebase import SampleBase
 
 
 class PulsingColors(SampleBase):

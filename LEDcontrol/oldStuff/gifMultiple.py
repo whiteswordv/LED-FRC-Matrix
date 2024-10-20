@@ -3,7 +3,7 @@ import time
 import sys
 import os 
 import glob
-from rgbmatrix import RGBMatrix, RGBMatrixOptions
+from LEDcontrol.simulation.rgbmatrix import RGBMatrix, RGBMatrixOptions
 from PIL import Image
 
 #setup gifs to load 
@@ -11,7 +11,7 @@ from PIL import Image
 #gif = Image.open("media\gif\vap.gif")
 #gif2 = Image.open("media\gif\4D.gif")
 gifList = []
-gif_folder = "/home/pi/LEDcontrol/sponsorLogos"
+gif_folder = "/home/pi/LEDcontrol/media/gif"
 for gif_file in glob.glob(os.path.join(gif_folder, "*.gif")):
     gif = Image.open(gif_file)
     gifList.append(gif)

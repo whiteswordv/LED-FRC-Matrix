@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # Display a runtext with double-buffering.
-from samplebase import SampleBase
-from rgbmatrix import graphics
+from LEDcontrol.OldStuff.samplebase import SampleBase
+from LEDcontrol.simulation.rgbmatrix import graphics
 import time
 
 font = graphics.Font()
