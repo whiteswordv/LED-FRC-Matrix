@@ -13,7 +13,7 @@ from PIL import Image
 patterns = ["*.gif", "*.png", "*.jpg", "*.PNG", "*.JPG"]
 
 gifList = []
-gif_folder = "/home/pi/LEDcontrol/sponsorLogos"
+gif_folder = "/home/pi/LEDcontrol/media/sponsorLogos"
 for pattern in patterns:
     for gif_file in glob.glob(os.path.join(gif_folder, pattern)):
         print(gif_file)
