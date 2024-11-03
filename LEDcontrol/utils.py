@@ -44,18 +44,18 @@ class ImageUtils:
 
         # Get the number of channels at 0
         for x in range(0, img.width):
-                for y in range(0, img.height):
-                    deadPixels += 1 if img.getpixel((x, y))[0] == 0 else 0
-                    deadPixels += 1 if img.getpixel((x, y))[1] == 0 else 0
-                    deadPixels += 1 if img.getpixel((x, y))[2] == 0 else 0
-        print("dead pixels: " + str(deadPixels))
+            for y in range(0, img.height):
+                deadPixels += 1 if img.getpixel((x, y))[0] == 0 else 0
+                deadPixels += 1 if img.getpixel((x, y))[1] == 0 else 0
+                deadPixels += 1 if img.getpixel((x, y))[2] == 0 else 0
+        # print("dead pixels: " + str(deadPixels))
 
         newImage = img.copy()
         
         # Repeat the dimming process until the screens are dim enough
         while (brightness := getImageBrightness(newImage) * numberOfPanels) > FOUR_AMPS / 2.1:
 
-            print("Reducing brightness: " + str(brightness))
+            # print("Reducing brightness: " + str(brightness))
 
             reductionAmmount = (brightness - int(FOUR_AMPS / 2.1)) // ((ONE_REDUCTION - deadPixels) * numberOfPanels)
 

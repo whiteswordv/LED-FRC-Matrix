@@ -10,6 +10,15 @@ class RGBMatrixOptions:
         pass
 
 
+class Canvas:
+
+    def __init__(self):
+        pass
+    
+    def SetImage(self, img: Image.Image):
+        self.image = img
+
+
 # Increase window size to make it easier to see on a desktop.
 DISPLAY_SCALE = 7
 
@@ -59,3 +68,11 @@ class RGBMatrix:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+
+
+    def CreateFrameCanvas(self) -> Canvas:
+        return Canvas()
+    
+
+    def SwapOnVSync(self, canvas: Canvas):
+        self.SetImage(canvas.image)
