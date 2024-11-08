@@ -2,7 +2,7 @@ import sys
 import time
 
 # from LEDcontrol.simulation.rgbmatrix import RGBMatrix, RGBMatrixOptions
-from rgbmatrix import RGBMatrix, RGBMatrixOptions # type: ignore
+from simulation.rgbmatrix import RGBMatrix, RGBMatrixOptions # type: ignore
 
 from networktables import NetworkTables
 
@@ -10,9 +10,9 @@ from PIL import Image
 
 from LEDModes import *
 from LEDModes.idleMode import IdleMode
-from LEDModes.prootMode import prootMode
+# from LEDModes.prootMode import prootMode
 from LEDModes.runGif import GifMode
-from constants import NetworkTableConstants, GifConstants, ImageConstants
+from LEDModes.constants import NetworkTableConstants, GifConstants, ImageConstants
 from utils import ImageUtils
 
 """
@@ -36,7 +36,7 @@ with Image.open(ImageConstants.LOADING) as loadingImage:
 
 sd = NetworkTables.getTable(NetworkTableConstants.TABLE_NAME) # this may need to be moved lower to avoid errors
 
-LED_MODES = [GifMode(matrix, GifConstants.IDLE), prootMode(matrix)]
+LED_MODES = [GifMode(matrix, GifConstants.IDLE)]
 
 led_mode = LED_MODES[0]
 
@@ -52,8 +52,9 @@ if __name__ == "__main__":
     NetworkTables.addConnectionListener(connectionListener, immediateNotify=True)
 
     # wait until connected to robot
-    while not connectionEstablished:
-        time.sleep(0.1)
+    # while not connectionEstablished:
+    #     print(True)
+    #     time.sleep(0.1)
     
     # use try statement so the code can be ended via keypress
     # (for testing purposes).
@@ -64,7 +65,8 @@ if __name__ == "__main__":
 
         # Main program loop
         while True:
-            led_index = sd.getNumber(NetworkTableConstants.LED_INDEX_NAME, default_value=0)
+            # led_index = sd.getNumber(NetworkTableConstants.LED_INDEX_NAME)
+            led_index=0
 
             if led_index != LED_MODES.index(led_mode):
                 led_mode.onEnd()

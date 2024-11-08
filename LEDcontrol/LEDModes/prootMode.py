@@ -2,10 +2,10 @@
 import time
 import sys
 import math
-from LEDcontrol.simulation.rgbmatrix import RGBMatrix
+from simulation.rgbmatrix import RGBMatrix
 from PIL import Image, ImageFilter
 
-from LEDcontrol.LEDModes.LEDmode import LEDmode
+from LEDModes.LEDmode import LEDmode
 rightEye = Image.open("/home/pi/LEDcontrol/media/prootImg/rightEye.png")
 leftEye = Image.open("/home/pi/LEDcontrol/media/prootImg/leftEye.png")
 rightSmile = Image.open("/home/pi/LEDcontrol/media/prootImg/rightSmile.png")

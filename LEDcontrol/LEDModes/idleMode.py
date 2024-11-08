@@ -1,12 +1,12 @@
 import time
 import sys
-from constants import GifConstants
+from LEDModes.constants import GifConstants
 
 # from LEDcontrol.simulation.rgbmatrix import RGBMatrix, RGBMatrixOptions
-from rgbmatrix import RGBMatrix # type: ignore
+from simulation.rgbmatrix import RGBMatrix # type: ignore
 
 from PIL import Image
-import LEDcontrol.LEDModes.LEDmode as LEDmode
+from LEDModes.LEDmode import LEDmode
 
 StartupANI = Image.open(GifConstants.STARTUP)
 IdleANI = Image.open(GifConstants.IDLE)
